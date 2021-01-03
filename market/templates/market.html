@@ -49,7 +49,7 @@
   <div class="market-content">
     <div class="item-catalog">
       {% for item in items %}
-        <a href="/market/item/?id={{ item.id }}" class="item-card">
+        <a href="/item/?id={{ item.id }}" class="item-card">
           <img class="item-card--pic" src="{{ item.image.url }}" />
           <p class="item-card--title">{{ item.title }}</p>
           <p class="item-card--condition">{{ item.condition }}</p>

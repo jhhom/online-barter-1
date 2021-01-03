@@ -180,11 +180,10 @@ def register(request):
                 'register.html',
                 {'user_form': user_form})
 
-@login_required
 def item(request):
     id = request.GET['id']
     item = Item.objects.get(id=id)
-    listed_items = Item.objects.filter(owner=request.user)
+    listed_items = []
     is_favourite = None
     barter_request_sent = False
     try:
@@ -200,8 +199,8 @@ def item(request):
     
     if request.method == 'POST':
         if not request.user.is_authenticated:
-            redirect('/market/login')
-
+            return redirect('login')
+        listed_items = Item.objects.filter(owner=request.user)
         try:
             _ = request.POST['favourite']
         except:
