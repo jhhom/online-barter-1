@@ -1,0 +1,330 @@
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Barter | Add Barter Item</title>
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/traded_items.css' %}">
+</head>
+<body>
+<!-- H E A D E R -->
+<header class="header">
+  <div class="logo" href="index.html">
+    <img src="{% static 'image/logo.png' %}">
+  </div>
+</header>
+
+<!-- M O B I L E   N A V I G A T I O N -->
+<div class="mobile-nav">
+  <div class="nav-icon">
+    <i class="fa fa-bars nav-btn" id="nav-btn"></i>
+  </div>
+  <div class="mobile-nav--links" id="mobile-nav--links">
+    <li>
+      <a href="profile.html">
+        <i class="fa fa-user" aria-hidden="true"></i> Profile
+      </a>
+    </li>
+    <li>
+      <a href="favourite.html">
+        <i class="fa fa-heart" aria-hidden="true"></i> Favourite
+      </a>
+    </li>
+    <li>
+      <a href="cart.html">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
+      </a>
+    </li>
+    <li>
+      <a href="message.html">
+        <i class="fa fa-envelope" aria-hidden="true"></i> Message
+      </a>
+    </li>
+    <li>
+      <a href="index.html">
+        <i class="fa fa-home" aria-hidden="true"></i> Back to Home
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fa fa-cog" aria-hidden="true"></i> Settings
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fa fa-sign-out" aria-hidden="true">Sign Out</i>
+      </a>
+    </li>
+  </div>
+</div>
+
+<!-- S I D E B A R -->
+<div id="sidebar" class="sidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()">
+  <li>
+    <a href="profile.html">
+      <i class="fa fa-user" aria-hidden="true"></i> Profile
+    </a>
+  </li>
+  <li>
+    <a href="favourite.html">
+      <i class="fa fa-heart" aria-hidden="true"></i> Favourite
+    </a>
+  </li>
+  <li>
+    <a href="cart.html">
+      <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
+    </a>
+  </li>
+  <li>
+    <a href="message.html">
+      <i class="fa fa-envelope" aria-hidden="true"></i> Message
+    </a>
+  </li>
+  <li>
+    <a href="index.html">
+      <i class="fa fa-home" aria-hidden="true"></i> Back to Home
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <i class="fa fa-cog" aria-hidden="true"></i> Settings
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out
+    </a>
+  </li>
+</div>
+
+<div id="content" class="content">
+
+  <!-- O W N   T R A D E D  I T E M S -->
+  <div>
+    <h2 class="table-title">My items listed on market</h2>
+    <table class="item-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Title</th>
+          <th class="trade-date">Listed Date</th>
+          <th class="trade-action">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td class="item-image"><img src="{{ item.image.url }}" /></td>
+          <td>{{ item.title }}</td>
+          <td>{{ item.listed_date }}</td>
+          <td>
+            <form action="" method="post">
+              {% csrf_token %}
+              <input type="text" name="id" id="" value="D{{ item.id }}" style="display: none;">
+              <input type="submit" value="Delete" class="delete-btn">
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <hr class="item-table--rule">
+    <p class="total-items">Total Number of Items &nbsp;&nbsp;&nbsp; <span>{{ items|length }}</span></p>
+  </div>
+  
+  <!-- P E N D I N G   B A R T E R   R E Q U E S T S -->
+  <div>
+    <h2 class="table-title">My pending barter requests</h2>
+    <table class="item-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Item Offered</th>
+          <th>Requested by</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for request in barter_requests %}
+        <tr>
+          <td class="item-display">
+            <img src="{{ request.item.image.url }}" />
+            <p>{{ request.item.title }}</p>
+          </td>
+          <td class="item-display">
+            <img src="{{ request.offer.image.url }}" />
+            <p>{{ request.offer.title }}</p>
+          </td>
+          <td>
+            <p>{{ request.offer.owner.username }}</p>
+          </td>
+          <td>
+            <form action="" method="post">
+              {% csrf_token %}
+              <input type="text" name="id" id="" value="A{{ request.id }}" style="display: none;">
+              <input class="accept-btn" type="submit" value="Accept">
+            </form>
+            <form action="" method="post">
+              {% csrf_token %}
+              <input type="text" name="id" id="" value="R{{ request.id }}" style="display: none;">
+              <input class="delete-btn" type="submit" value="Reject">
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <hr class="item-table--rule">
+    <p class="total-items">Total Number of Requests &nbsp;&nbsp;&nbsp; <span>{{ barter_requests|length }}</span></p>
+  </div>
+
+    <!-- P E N D I N G    R E Q U E S T S   S E N T -->
+    <div>
+      <h2 class="table-title">Barter Requests Sent</h2>
+      <table class="item-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Item Offered</th>
+            <th>Sent to</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for sent in sent_requests %}
+          <tr>
+            <td class="item-display">
+              <img src="{{ sent.item.image.url }}" />
+              <p>{{ sent.item.title }}</p>
+            </td>
+            <td class="item-display">
+              <img src="{{ sent.offer.image.url }}" />
+              <p>{{ sent.offer.title }}</p>
+            </td>
+            <td>{{ sent.item.owner.username }}</td>
+            <td>
+              <form action="" method="post">
+                {% csrf_token %}
+                <input type="text" name="id" id="" value="C{{ sent.id }}" style="display: none;">
+                <input type="submit" value="Cancel" class="cancel-btn">
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <hr class="item-table--rule">
+      <p class="total-items">Total Number of Requests &nbsp;&nbsp;&nbsp; <span>{{ sent_requests|length }}</span></p>
+    </div>
+
+  <!-- C O M P L E T E D   T R A D E S -->
+  <div>
+    <h2 class="table-title">Successful trades</h2>
+    <table class="item-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Item Offered</th>
+          <th>Trade with</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for trade in completed_trades %}
+        <tr>
+          <td class="item-display">
+            <img src="{{ trade.item.image.url }}" />
+            <p>{{ trade.item.title }}</p>
+          </td>
+          <td class="item-display">
+            <img src="{{ trade.offer.image.url }}" />
+            <p>{{ trade.offer.title }}</p>
+          </td>
+          <td>
+            {% if trade.item.owner == request.user %}
+              {{ trade.offer.owner.username }}
+            {% else %}
+              {{ trade.item.owner.username }}
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <hr class="item-table--rule">
+    <p class="total-items">Total Number of Trades &nbsp;&nbsp;&nbsp; <span>{{ completed_trades|length }}</span></p>
+
+  <!-- F A V O U R I T E S -->
+  <div>
+    <h2 class="table-title">My favourites</h2>
+    <table class="item-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Category</th>
+          <th>Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in favourites %}
+        <tr>
+          <td class="item-display">
+            <img src="{{ item.image.url }}" />
+            <p>{{ item.title }}</p>
+          </td>
+          <td class="category">{{ item.category }}</td>
+          <td>{{ item.owner }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <hr class="item-table--rule">
+    <p class="total-items">Total Number of Favourites &nbsp;&nbsp;&nbsp; <span>{{ favourites|length }}</span></p>
+  </div>
+
+{% if delete_status %}
+  <div style="background-color: green; color: white; position: absolute; bottom: 0;">
+    Delete successful
+  </div>
+{% endif %}
+
+<script type="text/javascript">
+document.getElementById('nav-btn').addEventListener('click', function() {
+  document.getElementById('mobile-nav--links').classList.toggle('active');
+})
+
+var mini = true;
+function toggleSidebar() {
+  if (mini) {
+    // open sidebar
+    document.getElementById('sidebar').style.width = '180px';
+    document.getElementById('content').style.marginLeft = '180px';
+    this.mini = false;
+  } else {
+    // close sidebar
+    document.getElementById('sidebar').style.width = '48px';
+    document.getElementById('content').style.marginLeft = '48px';
+    this.mini = true;
+  }
+}
+
+var itemCategories = [
+  {% for category in categories %}
+  {
+    code: '{{ category.0 }}',
+    name: '{{ category.1 }}',
+  },
+  {% endfor %}
+]
+
+document.querySelectorAll('.category').forEach(function(el) {
+  el.innerHTML = '<span>' + itemCategories.find(function(category) {
+    console.log(category.code)
+    console.log(el.textContent)
+    return category.code === el.textContent
+  }).name + '</span>';
+})
+</script>
+
+</body>

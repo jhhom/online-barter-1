@@ -1,0 +1,169 @@
+.content {
+  padding: 0 120px;
+}
+
+.item-container {
+  display: flex;
+}
+
+.item-image--container {
+  flex-basis: 50%;
+}
+
+.item-image {
+  width: 500px;
+  height: 500px;
+  object-fit: contain;
+}
+
+.item-details--container {
+  position: relative;
+}
+
+.item-details--title {
+  margin-bottom: 4px;
+}
+
+.item-details--owner {
+  margin-bottom: 24px;
+}
+
+.item-details--tags {
+  margin-bottom: 24px;
+}
+
+.item-details--tags span {
+  text-align: center;
+  padding: 4px 4px;
+  color: white;
+  cursor: pointer;
+  margin: 0 4px;
+  background-color: #898989;
+}
+
+.item-details--tags span:first-child {
+  margin-left: 0;
+}
+
+.item-details--container {
+  flex-basis: 50%;
+  padding-top: 32px;
+  padding-left: 32px;
+}
+
+.item-details--bottom {
+  position: absolute;
+  bottom: 0;
+}
+
+.item-details--date {
+  margin-bottom: 16px;
+}
+
+.item-details--favourite-btn,
+.item-details--barter-btn {
+  color: #898989;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.item-details--favourite-btn:hover,
+.item-details--barter-btn:hover,
+.barter-popup--confirm-btn:hover {
+  background-color: #282828;
+  color: white;
+}
+
+.item-details--favourite-btn {
+  margin-right: 1rem;
+}
+
+.buttons {
+  display: flex;
+}
+
+.barter-popup {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: 800px;
+  height: 450px;
+  border: 1px solid #282828;
+  padding: 20px 40px;
+}
+
+.barter-popup--close-btn {
+  position: absolute;
+  right: 40px;
+  top: 30px;
+  border: none;
+  background: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.barter-popup--confirm-btn {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  color: #898989;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.item-selector {
+  margin-top: 28px;
+  overflow: auto;
+}
+
+.item-selector--item {
+  flex-basis: 33%;
+  text-align: center;
+  padding: 0 8px;
+  margin-bottom: 24px;
+}
+
+.item-selector form {
+  width: 100%;
+  display: flex;
+}
+
+.item-selector input {
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.item-selector--image {
+	cursor: pointer;
+}
+
+.item-selector--image img {
+  width: 200px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.item-selector input:checked + label img {
+	border: 2px solid blue;
+}
+
+.barter-status-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: 800px;
+  height: 450px;
+  border: 1px solid #282828;
+  padding: 20px 40px;
+}

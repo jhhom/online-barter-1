@@ -1,8 +1,132 @@
+{% load static %}
 <head>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Barter | Market</title>
+  <link rel="stylesheet" href="{% static 'css/account/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/account/navigation.css' %}">
+  <link rel="stylesheet" href="{% static 'css/account/footer.css' %}">
+  <link rel="stylesheet" href="{% static 'css/market.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
-  {% for item in items %}
-    <img src="{{ item.image.url }}" />
-  {% endfor %}  
+<!-- N A V I G A T I O N -->
+<div class="container">
+  <div class="navigation-container">
+    <div class="logo" href="index.html">
+      <img src="{% static 'image/logo.png' %}" alt="logo" />
+    </div>
+    <nav class="navigation">
+      <ul id="menu-items" class="navigation--links">
+        <li class="navigation--link"><a href="index.html">Home</a></li>
+        <li class="navigation--link"><a href="product.html">Market</a></li>
+        <li class="navigation--link"><a href="#">Contact</a></li>
+        <li class="navigation--link">
+          <a href="profile.html">
+            <img src="{% static 'image/icon/user.png' %}" alt="user" >
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <img src="{% static 'image/icon/menu.png' %}" alt="" class="menu-icon" onclick="menuToggle()">
+  </div>
+</div>
+
+<div class="market-container">
+  <h1 class="page-title">Items on Barter</h1>
+  <div class="search-container">
+    <!-- form -->
+    <form method="get" class="search-form">
+      {{ search_form.term }}
+      <input type="submit" value="Search" class="search-form--submit">
+    </form>
+    <form method="get" class="sort-form">
+      <label for="{{ sort_form_form.sort_by.id_for_label }}">Sort by</label>
+      {{ sort_form.sort_by }}
+    </form>
+  </div>  
+  <div class="market-content">
+    <div class="item-catalog">
+      {% for item in items %}
+        <a href="/market/item/?id={{ item.id }}" class="item-card">
+          <img class="item-card--pic" src="{{ item.image.url }}" />
+          <p class="item-card--title">{{ item.title }}</p>
+          <p class="item-card--condition">{{ item.condition }}</p>
+          <p class="item-card--category"><span>{{ item.category }}</span></p>
+        </a>
+      {% endfor %}
+    </div>
+    <div class="item-filter">
+      <form method="get">
+        <label style="display: block; margin-bottom: 4px; font-weight: 500;" for="{{ filter_form.condition_filter.id_for_label }}">Condition</label>
+        <p>{{ filter_form.condition_filter }}</p>
+        
+        <div style="margin-bottom: 16px;"></div>
+
+        <label style="display: block; margin-bottom: 4px; font-weight: 500;" for="{{ filter_form.category_filter.id_for_label }}">Category</label>
+        <p>{{ filter_form.category_filter }}</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+  
+<!-- F O O T E R -->
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      <div>
+        <h3>Online <em>Barter</em></h3>
+        <p>Our Purpose Is To Sustainably Reduce Waste and Benefits to the Many.</p>
+      </div>
+      <div class="footer-col-2">
+        <h3>Useful Links</h3>
+        <ul>
+          <li>Coupons</li>
+          <li>Blog Post</li>
+          <li>Return Policy</li>
+          <li>Join Affiliate</li>
+        </ul>
+      </div>
+      <div class="footer-col-3">
+        <h3>Follow us</h3>
+        <ul>
+          <li>Facebook</li>
+          <li>Twitter</li>
+          <li>Instagram</li>
+          <li>YouTube</li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <p class="copyright">Copyright 2020 - CMT322 Group 5</p>
+  </div>
+</div>
+
+<script type="text/javascript">
+var itemCategories = [
+  {% for category in categories %}
+  {
+    code: '{{ category.0 }}',
+    name: '{{ category.1 }}',
+  },
+  {% endfor %}
+]
+
+document.querySelectorAll('.item-card--condition').forEach(function(el) {
+  if (el.textContent === 'NW')
+    el.textContent = 'New';
+  else
+    el.textContent = 'Used';
+})
+
+document.querySelectorAll('.item-card--category').forEach(function(el) {
+  el.innerHTML = '<span>' + itemCategories.find(function(category) {
+    console.log(category.code)
+    console.log(el.textContent)
+    return category.code === el.textContent
+  }).name + '</span>';
+})
+</script>
 </body>

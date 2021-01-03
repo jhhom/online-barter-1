@@ -4,84 +4,171 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Online Barter | Add Barter Item</title>
-
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
-  <link rel="stylesheet" href="{% static 'css/user.css' %}">
-   
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/add_item.css' %}">
 </head>
 <body>
-   <!--header area start-->
-   <header>
-    <div class="logo" href="index.html"><img src="{% static 'image/logo.png' %}" alt="logo" ></div>
-  </header>
-  <!--header area end-->
-
-  <!--mobile navigation bar start-->
-  <div class="mobile_nav">
-      <div class="nav_bar">
-          <i class="fa fa-bars nav_btn"></i>
-      </div>
-      <div class="mobile_nav_items">
-          <li><a href="profile.html"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
-      <li><a href="favourite.html"><i class="fa fa-heart" aria-hidden="true"></i> Favourite</a></li>
-      <li><a href="cart.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a></li>
-      <li><a href="message.html"><i class="fa fa-envelope" aria-hidden="true"></i> Message</a></li>
-      <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Back to Home</a></li>
-      <li><a href=""><i class="fa fa-cog" aria-hidden="true"></i> Settings</a></li>
-      <li><a href=""><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
-      </div>
+<!-- H E A D E R -->
+<header class="header">
+  <div class="logo" href="index.html">
+    <img src="{% static 'image/logo.png' %}">
   </div>
-  <!--mobile navigation bar end-->
+</header>
 
-  <!--sidebar start-->
-  <div id="sidebarID" class="sidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()"> 
-      <li><a href="profile.html"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
-      <li><a href="favourite.html"><i class="fa fa-heart" aria-hidden="true"></i> Favourite</a></li>
-      <li><a href="cart.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a></li>
-      <li><a href="message.html"><i class="fa fa-envelope" aria-hidden="true"></i> Message</a></li>
-      <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Back to Home</a></li>
-      <li><a href=""><i class="fa fa-cog" aria-hidden="true"></i> Settings</a></li>
-      <li><a href=""><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
+<!-- M O B I L E   N A V I G A T I O N -->
+<div class="mobile-nav">
+  <div class="nav-icon">
+    <i class="fa fa-bars nav-btn" id="nav-btn"></i>
   </div>
-  <!--sidebar end-->
+  <div class="mobile-nav--links" id="mobile-nav--links">
+    <li>
+      <a href="profile.html">
+        <i class="fa fa-user" aria-hidden="true"></i> Profile
+      </a>
+    </li>
+    <li>
+      <a href="favourite.html">
+        <i class="fa fa-heart" aria-hidden="true"></i> Favourite
+      </a>
+    </li>
+    <li>
+      <a href="cart.html">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
+      </a>
+    </li>
+    <li>
+      <a href="message.html">
+        <i class="fa fa-envelope" aria-hidden="true"></i> Message
+      </a>
+    </li>
+    <li>
+      <a href="index.html">
+        <i class="fa fa-home" aria-hidden="true"></i> Back to Home
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fa fa-cog" aria-hidden="true"></i> Settings
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fa fa-sign-out" aria-hidden="true">Sign Out</i>
+      </a>
+    </li>
+  </div>
+</div>
 
-  <div style="margin-top: 8rem; margin-left: 6rem;">
-    <form enctype="multipart/form-data" method="post">
+<!-- S I D E B A R -->
+<div id="sidebar" class="sidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()">
+  <li>
+    <a href="profile.html">
+      <i class="fa fa-user" aria-hidden="true"></i> Profile
+    </a>
+  </li>
+  <li>
+    <a href="favourite.html">
+      <i class="fa fa-heart" aria-hidden="true"></i> Favourite
+    </a>
+  </li>
+  <li>
+    <a href="cart.html">
+      <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
+    </a>
+  </li>
+  <li>
+    <a href="message.html">
+      <i class="fa fa-envelope" aria-hidden="true"></i> Message
+    </a>
+  </li>
+  <li>
+    <a href="index.html">
+      <i class="fa fa-home" aria-hidden="true"></i> Back to Home
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <i class="fa fa-cog" aria-hidden="true"></i> Settings
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out
+    </a>
+  </li>
+</div>
+
+<!-- A D D   I T E M S   F O R M -->
+<div id="content" class="content">
+  <div class="small-container">
+    <h2>Add Barter Item</h2>
+    <form enctype="multipart/form-data" method="post" class="form">
+      {{ form.non_field_errors }}
+      <p class="field-container">
+        <label for="{{ form.title.id_for_label }}">Title</label>
+        {{ form.title }}
+        {{ form.title.errors }}
+      </p>
+      <p class="field-container">
+        <label for="{{ form.condition.id_for_label }}">Condition</label>
+        {{ form.condition }}
+        {{ form.condition.errors }}
+      </p>
+      <p class="field-container">
+        <label for="{{ form.description.id_for_label }}">Description</label>
+        {{ form.description }}
+        {{ form.description.errors }}
+      </p>
+      <p class="field-container">
+        <label for="{{ form.image.id_for_label }}">Image</label>
+        {{ form.image }}
+        {{ form.image.errors}}
+      </p>
+      <p><input type="submit" value="List item" class="submit-btn"></p>
       {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">List Item</button>
     </form>
   </div>
+</div>
 
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $('.nav_btn').click(function(){
-        $('.mobile_nav_items').toggleClass('active');
-      });
-    });
+<!--
+<form enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <p>
+    {{ form.title }}
+    {{ form.title.errors }}
+  </p>
+  <button type="submit">List Item</button>
+</form>
+-->
 
-    var mini = true;
-    function toggleSidebar() {
-        if (mini) {
-            /*opening sidebar*/
-            document.getElementById("sidebarID").style.width = "180px";
-            document.getElementById("contentID").style.marginLeft = "180px";
-            this.mini = false;
-        }else {
-            /*closing sidebar*/
-            document.getElementById("sidebarID").style.width = "48px";
-            document.getElementById("contentID").style.marginLeft = "48px";
-            this.mini = true;
-        }
-    }
+<script type="text/javascript">
+  
+document.getElementById('nav-btn').addEventListener('click', function() {
+  document.getElementById('mobile-nav--links').classList.toggle('active');
+})
 
-    $(document).ready(function(){
-        $('form input').change(function () {
-            $('form p').text(this.files.length + " file(s) selected");
-        });
-    });
+// document.getElementById('file-input--input').addEventListener('change', function() {
+//   document.getElementById('file-input--text').textContent = this.files.length + " file(s) selected";
+// })
 
-    </script>
+var mini = true;
+var sidebar = document.getElementById('sidebar');
+var content = document.getElementById('content');
+function toggleSidebar() {
+  if (mini) {
+    // open sidebar
+    sidebar.style.width = '180px';
+    content.style.marginLeft = '180px';
+    this.mini = false;
+  } else {
+    // close sidebar
+    sidebar.style.width = '48px';
+    content.style.marginLeft = '48px';
+    this.mini = true;
+  }
+}
+</script>
 </body>
 </html>

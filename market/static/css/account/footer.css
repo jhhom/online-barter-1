@@ -1,0 +1,32 @@
+.footer {
+    background: white;
+    color: #8a8a8a;
+    font-size: 14px;
+    padding: 60px 0 20px;
+    margin-top: 60px;
+}
+
+.footer h3 {
+    color:#000;
+    margin-bottom:20px;
+}
+.footer p {
+    color: #8a8a8a;
+}
+
+.footer-col-2, .footer-col-3 {
+    flex-basis: 12%;
+    text-align: center;
+}
+
+.footer ul { list-style-type: none; }
+
+.footer hr {
+    border:none;
+    background: #8a8a8a;
+    height: 1px;
+    margin: 20px 0;
+}
+.copyright{
+    text-align: center;
+}

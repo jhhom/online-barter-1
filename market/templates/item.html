@@ -1,0 +1,170 @@
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Barter | Market</title>
+  <link rel="stylesheet" href="{% static 'css/account/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/account/navigation.css' %}">
+  <link rel="stylesheet" href="{% static 'css/account/footer.css' %}">
+  <link rel="stylesheet" href="{% static 'css/item.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- N A V I G A T I O N -->
+<div class="container">
+  <div class="navigation-container">
+    <div class="logo" href="index.html">
+      <img src="{% static 'image/logo.png' %}" alt="logo" />
+    </div>
+    <nav class="navigation">
+      <ul id="menu-items" class="navigation--links">
+        <li class="navigation--link"><a href="index.html">Home</a></li>
+        <li class="navigation--link"><a href="product.html">Market</a></li>
+        <li class="navigation--link"><a href="#">Contact</a></li>
+        <li class="navigation--link">
+          <a href="profile.html">
+            <img src="{% static 'image/icon/user.png' %}" alt="user" >
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <img src="{% static 'image/icon/menu.png' %}" alt="" class="menu-icon" onclick="menuToggle()">
+  </div>
+</div>
+
+<div class="content">
+  <div class="item-container">
+    <div class="item-image--container">
+      <img class="item-image" src="{{ item.image.url }}" alt="{{ item.title }}" />
+    </div>
+    <div class="item-details--container">
+      <h2 class="item-details--title">{{ item.title }}</h2>
+      <p class="item-details--owner">Posted by {{ item.owner.username }}</p>
+      <p class="item-details--tags" data-code="{{ item.condition }}">
+        <span class="item-details--condition" data-code="{{ item.condition }}"></span>
+        <span class="item-details--category" data-code="{{ item.category }}"></span>
+      </p>
+      
+      <p class="item-details--description">{{ item.description }}</p>
+      <div class="item-details--bottom">
+        <p class="item-details--date">Listed on {{ item.listed_date }}</p>
+        <div class="buttons">
+          <form method="post">
+            <input type="text" name="favourite" value="{{ item.id }}" style="display: none;">
+            <button type="submit" class="item-details--favourite-btn">
+              {% if is_favourite %}
+                <i class="fa fa-heart"></i>
+              {% else %}
+                <i class="fa fa-heart-o"></i>
+              {% endif %}
+              &nbsp; Favourite
+            </button>
+            {% csrf_token %}
+          </form>
+          <button class="item-details--barter-btn" onclick="triggerBarter()">Barter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="barter-popup" id="barter-popup">
+  <h2>Select item to exchange</h2>
+  <div class="item-selector">
+    <form method="post">
+      {% for item in listed_items %}
+        <div class="item-selector--item">
+          <input {% if forloop.first %}checked{% endif %} type="radio" name="exchanged-item" id="item-{{ item.id }}" value="{{ item.id }}">
+          <label
+            for="item-{{ item.id }}"
+            class="item-selector--image"
+          >
+            <img src="{{ item.image.url }}">
+          </label>
+          <p style="margin-top: 8px;">{{ item.title }}</p>
+        </div>
+        {% csrf_token %}
+      {% endfor %}
+      <button class="barter-popup--confirm-btn" type="submit">Barter</button>
+    </form>
+  </div>
+  <button class="barter-popup--close-btn" onclick="closeBarter()">X</button>
+</div>
+
+{% if barter_request_sent %}
+<div class="barter-status-popup" id="barter-status-popup">
+  Your barter request has been sent.
+  <button class="barter-popup--close-btn" onclick="closeBarterStatus()">X</button>
+</div>
+{% endif %}
+
+<!-- F O O T E R -->
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      <div>
+        <h3>Online <em>Barter</em></h3>
+        <p>Our Purpose Is To Sustainably Reduce Waste and Benefits to the Many.</p>
+      </div>
+      <div class="footer-col-2">
+        <h3>Useful Links</h3>
+        <ul>
+          <li>Coupons</li>
+          <li>Blog Post</li>
+          <li>Return Policy</li>
+          <li>Join Affiliate</li>
+        </ul>
+      </div>
+      <div class="footer-col-3">
+        <h3>Follow us</h3>
+        <ul>
+          <li>Facebook</li>
+          <li>Twitter</li>
+          <li>Instagram</li>
+          <li>YouTube</li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <p class="copyright">Copyright 2020 - CMT322 Group 5</p>
+  </div>
+</div>
+
+<script type="text/javascript">
+document.querySelectorAll('.item-details--condition').forEach(function(el) {
+  if (el.dataset.code === 'NW')
+    el.innerHTML = '<span>New</span>';
+  else
+    el.innerHTML = '<span>Used</span>';
+})
+
+var itemCategories = [
+  {% for category in categories %}
+  {
+    code: '{{ category.0 }}',
+    name: '{{ category.1 }}',
+  },
+  {% endfor %}
+];
+
+document.querySelectorAll('.item-details--category').forEach(function(el) {
+  el.innerHTML = '<span>' + itemCategories.find(function(category) {
+    return category.code === el.dataset.code
+  }).name + '</span>';
+  console.log('what')
+})
+
+function triggerBarter() {
+  document.getElementById('barter-popup').style.display = 'block';
+}
+
+function closeBarter() {
+  document.getElementById('barter-popup').style.display = 'none';
+}
+
+function closeBarterStatus() {
+  document.getElementById('barter-status-popup').style.display = 'none';
+}
+</script>
+</body>

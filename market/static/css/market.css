@@ -1,0 +1,123 @@
+.market-container {
+
+}
+
+.page-title {
+  margin: 40px 0;
+  padding: 0 140px;
+  font-size: 24px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  padding: 0 140px;
+}
+
+.search-form {
+  flex-basis: 50%;
+}
+
+.search-form input[type="text"] {
+  height: 30px;
+  width: 70%;
+  margin-top: 10px;
+  padding: 0 10px;
+  border: 1px solid #d9d9d9;
+}
+
+.search-form--submit {
+  border: none;
+  cursor: pointer;
+  background-color: gray;
+  color: white;
+  height: 30px;
+  padding: 0 20px;
+  margin: 10px 0;
+}
+
+.sort-form {
+  display: flex;
+}
+
+.sort-form label {
+  display: block;
+}
+
+.sort-form select {
+  display: block;
+  position: relative;
+  margin-left: 16px;
+  border: 1px solid #d9d9d9;
+  height: 100%;
+  padding: 8px 10px;
+  border-radius: 3px;
+  outline: none;
+}
+
+.market-content {
+  display: flex;
+  padding: 0 140px;
+}
+
+.item-catalog {
+  display: flex;
+  flex-basis: 80%;
+  flex-grow: 0;
+  flex-wrap: wrap;
+}
+
+.item-card {
+  display: block;
+  flex-basis: 33%;
+  margin: 64px 0;
+  padding: 0 16px;
+  cursor: pointer;
+  /* box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+  transition: transform ease-out .3s,
+              box-shadow ease-out .3s;
+}
+
+.item-card:hover {
+  transform: translateY(-16px);
+  /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
+}
+
+.item-card--pic {
+  display: block;
+  margin: 0 auto 16px auto;
+  object-fit: contain;
+  width: 250px;
+  height: 150px;
+}
+
+.item-card--title {
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.item-card--condition {
+  font-size: 14px;
+  /* text-align: center; */
+  margin-bottom: 8px;
+}
+
+/* .item-card--category { text-align: center; } */
+
+.item-card--category span {
+  background-color: gray;
+  color: white;
+  padding: 1px 8px;
+  font-size: 12px;
+  border-radius: 500px;
+  font-weight: bold;
+}
+
+.item-filter form ul {
+  flex-basis: 20%;
+  flex-grow: 0;
+  list-style-type: none;
+}
+

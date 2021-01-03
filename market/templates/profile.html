@@ -1,0 +1,163 @@
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Barter | Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+<body>
+<!-- H E A D E R -->
+<header class="header">
+  <div class="logo" href="index.html">
+    <img src="{% static 'image/logo.png' %}">
+  </div>
+</header>
+
+<!-- M O B I L E   N A V I G A T I O N -->
+<div class="mobile-nav">
+  <div class="nav-icon">
+    <i class="fa fa-bars nav-btn" id="nav-btn"></i>
+  </div>
+  <div class="mobile-nav--links" id="mobile-nav--links">
+    <li>
+      <a href="profile.html">
+        <i class="fa fa-user" aria-hidden="true"></i> Profile
+      </a>
+    </li>
+    <li>
+      <a href="favourite.html">
+        <i class="fa fa-heart" aria-hidden="true"></i> Favourite
+      </a>
+    </li>
+    <li>
+      <a href="cart.html">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
+      </a>
+    </li>
+    <li>
+      <a href="message.html">
+        <i class="fa fa-envelope" aria-hidden="true"></i> Message
+      </a>
+    </li>
+    <li>
+      <a href="index.html">
+        <i class="fa fa-home" aria-hidden="true"></i> Back to Home
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fa fa-cog" aria-hidden="true"></i> Settings
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fa fa-sign-out" aria-hidden="true">Sign Out</i>
+      </a>
+    </li>
+  </div>
+</div>
+
+<!-- S I D E B A R -->
+<div id="sidebar" class="sidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()">
+  <li>
+    <a href="profile.html">
+      <i class="fa fa-user" aria-hidden="true"></i> Profile
+    </a>
+  </li>
+  <li>
+    <a href="favourite.html">
+      <i class="fa fa-heart" aria-hidden="true"></i> Favourite
+    </a>
+  </li>
+  <li>
+    <a href="cart.html">
+      <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
+    </a>
+  </li>
+  <li>
+    <a href="message.html">
+      <i class="fa fa-envelope" aria-hidden="true"></i> Message
+    </a>
+  </li>
+  <li>
+    <a href="index.html">
+      <i class="fa fa-home" aria-hidden="true"></i> Back to Home
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <i class="fa fa-cog" aria-hidden="true"></i> Settings
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out
+    </a>
+  </li>
+</div>
+
+<div class="content" id="content">
+  <div class="profile">
+    <img class="profile-image" src="{{ user.profile.photo.url }}" alt="">
+    <p>{{ user.username }}</p>
+    <p>{{ user.profile.address }}</p>
+    <p>{{ user.profile.phone }}</p>
+  </div>
+  <div class="item-row">
+    <h2 class="row-title">Items ready to barter</h2>
+    <div class="row">
+      {% for item in ready_items %}
+      <div class="card">
+        <img src="{{ item.image.url }}" alt="{{ item.title }}">
+        <p>{{ item.title }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="show-btn--container">
+      <a class="show-btn" href="/market/traded_items">Show more</a>
+    </div>
+  </div>
+
+  <div class="item-row">
+    <h2 class="row-title">Items had been exchanged</h2>
+    <div class="row">
+      {% for item in exchanged_items %}
+      <div class="card">
+        <img src="{{ item.image.url }}" alt="{{ item.title }}">
+        <p>{{ item.title }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="show-btn--container">
+      <a class="show-btn" href="/market/traded_items">Show more</a>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+document.getElementById('nav-btn').addEventListener('click', function() {
+  document.getElementById('mobile-nav--links').classList.toggle('active');
+})
+
+var mini = true;
+function toggleSidebar() {
+  if (mini) {
+    // open sidebar
+    document.getElementById('sidebar').style.width = '180px';
+    document.getElementById('content').style.marginLeft = '180px';
+    this.mini = false;
+  } else {
+    // close sidebar
+    document.getElementById('sidebar').style.width = '48px';
+    document.getElementById('content').style.marginLeft = '48px';
+    this.mini = true;
+  }
+}
+</script>
+</body>
+</html>

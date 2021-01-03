@@ -16,6 +16,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
+NPM_BIN_PATH = 'C:\\Program Files\\nodejs\\npm.cmd'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tailwind',
+    'theme',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +130,5 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = 'market/market'
 LOGIN_URL = 'market/login'
 LOGOUT_URL = 'market/logout'
+
+TAILWIND_APP_NAME = 'theme'

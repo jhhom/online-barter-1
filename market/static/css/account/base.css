@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body { font-family: 'Playfair Display', serif; }
+
+a {
+  text-decoration: none;
+  color: #282828;
+}
+
+p { color: #282828; }
+
+.container {
+  max-width: 1300px;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.btn {
+  display: inline-block;
+  background: #898989;
+  color: #fff;
+  padding: 8px 30px;
+  margin: 30px 0;
+  transition: 0.5s;
+}
+
+.btn:hover { background: #282828; }
+
+.content-container { position: relative; }
+
+.content-container img { width: 100%; }
+
+@media only screen and (max-width: 600px) {
+  .row { text-align: center; }
+}

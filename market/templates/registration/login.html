@@ -1,22 +1,110 @@
+{% load static %}
+<html lang="en">
 <head>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Barter | Login</title>
+  <link rel="stylesheet" href="{% static 'css/account/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/account/navigation.css' %}">
+  <link rel="stylesheet" href="{% static 'css/account/footer.css' %}">
+  <link rel="stylesheet" href="{% static 'css/account/form.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
-  <h1>Log-in</h1>
-  {% if form.errors %}
-    <p>
-      Your username and password didn't match.
-      Please try again.
-    </p>
-  {% else %}
-    <p>Please, use the following forms to log-in:</p>
-  {% endif %}
-  <div class="login-form">
-    <form action="{% url 'login' %}" method="post">
-      {{ form.as_p }}
-      {% csrf_token %}
-      <input type="hidden" name="next" value="{{ next }}" />
-      <p><input type="submit" value="Log-in"></p>
-    </form>
+<!-- N A V I G A T I O N -->
+<div class="container">
+  <div class="navigation-container">
+    <div class="logo" href="index.html">
+      <img src="{% static 'image/logo.png' %}" alt="logo" />
+    </div>
+    <nav class="navigation">
+      <ul id="menu-items" class="navigation--links">
+        <li class="navigation--link"><a href="index.html">Home</a></li>
+        <li class="navigation--link"><a href="product.html">Market</a></li>
+        <li class="navigation--link"><a href="#">Contact</a></li>
+        <li class="navigation--link">
+          <a href="profile.html">
+            <img src="{% static 'image/icon/user.png' %}" alt="user" >
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <img src="{% static 'image/icon/menu.png' %}" alt="" class="menu-icon" onclick="menuToggle()">
   </div>
+</div>
+
+
+
+<!--
+<form method="post">
+  {{ form.username }}
+
+  {{ form.password }}
+  {% csrf_token %}
+  <p><input type="submit" value="Log in"></p>
+</form>
+-->
+
+<!-- C O N T E N T : LOGIN & REGISTRATION FORM -->
+<div class="content-container">
+  <img src="{% static 'image/background2.jpg' %}">
+  <div class="form-container">
+    
+    <p class="form--title">Login</p>
+    <form method="post" class="form">
+      {{ form.non_field_errors }}
+      <p class="form--field">
+        <label for="{{ form.username.id_for_label }}">Username</label>
+        {{ form.username }}
+        {{ form.username.errors }}
+      </p>
+      <p class="form--field">
+        <label for="{{ form.password.id_for_label">Password</label>
+        {{ form.password }}
+        {{ form.password.errors }}
+      </p>
+
+      <!-- {{ form.as_p }} -->
+      {% csrf_token %}
+      <p style="margin-top: 32px;"><input type="submit" value="Login" class="btn"></p>
+    </form>
+    <p style="margin-bottom: 32px; padding-left: 20px;">
+      Don't have an account? Register <a class="redirect-link" href="{% url 'register' %}">here</a>.
+    </p>
+  </div>
+</div>
+
+<!-- F O O T E R -->
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      <div>
+        <h3>Online <em>Barter</em></h3>
+        <p>Our Purpose Is To Sustainably Reduce Waste and Benefits to the Many.</p>
+      </div>
+      <div class="footer-col-2">
+        <h3>Useful Links</h3>
+        <ul>
+          <li>Coupons</li>
+          <li>Blog Post</li>
+          <li>Return Policy</li>
+          <li>Join Affiliate</li>
+        </ul>
+      </div>
+      <div class="footer-col-3">
+        <h3>Follow us</h3>
+        <ul>
+          <li>Facebook</li>
+          <li>Twitter</li>
+          <li>Instagram</li>
+          <li>YouTube</li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <p class="copyright">Copyright 2020 - CMT322 Group 5</p>
+  </div>
+</div>
 </body>
+</html>
