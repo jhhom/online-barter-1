@@ -14,16 +14,16 @@
 <!-- N A V I G A T I O N -->
 <div class="container">
   <div class="navigation-container">
-    <div class="logo" href="index.html">
+    <div class="logo" href="{% url 'index' %}">
       <img src="{% static 'image/logo.png' %}" alt="logo" />
     </div>
     <nav class="navigation">
       <ul id="menu-items" class="navigation--links">
-        <li class="navigation--link"><a href="index.html">Home</a></li>
-        <li class="navigation--link"><a href="product.html">Market</a></li>
+        <li class="navigation--link"><a href="{% url 'index' %}">Home</a></li>
+        <li class="navigation--link"><a href="{% url 'market' %}">Market</a></li>
         <li class="navigation--link"><a href="#">Contact</a></li>
         <li class="navigation--link">
-          <a href="profile.html">
+          <a href="{% url 'profile' %}">
             <img src="{% static 'image/icon/user.png' %}" alt="user" >
           </a>
         </li>

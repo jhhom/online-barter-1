@@ -9,6 +9,9 @@ from .models import Item, Barter
 
 import statistics
 
+def index(request):
+    return render(request, 'index.html')
+
 # Create your views here.
 @login_required
 def profile(request):
