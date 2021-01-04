@@ -120,12 +120,15 @@ def market(request):
             term = search_form.cleaned_data['term']
             results = Item.objects.filter(title__contains=term)
             if request.user.is_authenticated:
-                most_favourited = statistics.mode(
-                    [item.category for item in Item.objects.filter(favourited_by=request.user)]
-                )
-                results \
-                    .extra(select={'match': f'category="{most_favourited}"'}) \
-                    .order_by('-match')
+                try:
+                    most_favourited = statistics.mode(
+                        [item.category for item in Item.objects.filter(favourited_by=request.user)]
+                    )
+                    results \
+                        .extra(select={'match': f'category="{most_favourited}"'}) \
+                        .order_by('-match')
+                except:
+                    pass
     
     if 'sort_by' in request.GET:
         sort_form = ItemSortForm(request.GET)
