@@ -16,16 +16,16 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
-NPM_BIN_PATH = 'C:\\Program Files\\nodejs\\npm.cmd'
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2!49m6-a*+t4l56oq=#6)7zyixf=+q=3w&9qpwsfo&%b2)kn+('
+# SECRET_KEY = '2!49m6-a*+t4l56oq=#6)7zyixf=+q=3w&9qpwsfo&%b2)kn+('
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = []
 
