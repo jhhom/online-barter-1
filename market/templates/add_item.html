@@ -125,6 +125,11 @@
         {{ form.image }}
         {{ form.image.errors}}
       </p>
+      <p class="field-container">
+        <label for="{{ form.category.id_for_label }}">Category</label>
+        {{ form.category }}
+        {{ form.category.errors }}
+      </p>
       <p><input type="submit" value="List item" class="submit-btn"></p>
       {% csrf_token %}
     </form>

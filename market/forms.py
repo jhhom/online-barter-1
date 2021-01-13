@@ -35,12 +35,13 @@ class ProfileUpdateForm(forms.ModelForm):
 class AddItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['title', 'condition', 'description', 'image']
+        fields = ['title', 'condition', 'description', 'image','category']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'title-input'}),
             'condition': forms.Select(attrs={'class': 'condition-input'}),
             'description': forms.Textarea(attrs={'class': 'description-input'}),
             'image': forms.ClearableFileInput(attrs={'class': 'image-input'}),
+            'category':forms.Select(attrs={'class':'category-input'}),
         }
 
 
