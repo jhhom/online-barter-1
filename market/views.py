@@ -84,6 +84,18 @@ def add_item(request):
     return render(request, 'add_item.html', {'form': form})
 
 @login_required
+def update_item(request, item_id):
+    try:
+        item_sel = Item.objects.get(id = item_id)
+    except Item.DoesNotExist:
+        return redirect('traded_items')
+    form = AddItemForm(request.POST or None, instance = item_sel)
+    if form.is_valid():
+       form.save()
+       return redirect('traded_items')
+    return render(request, 'add_item.html', {'form':form,'item':item_sel})
+
+@login_required
 def settings(request):
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)

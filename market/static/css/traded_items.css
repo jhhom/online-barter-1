@@ -96,7 +96,7 @@ body {
     margin-left: 0;
     margin-top: 0;
     padding: 10px 20px;
-    trannsition: 0;
+    transition: 0;
   }
 
   .mobile-nav {
@@ -204,7 +204,8 @@ body {
 
 .delete-btn,
 .accept-btn,
-.cancel-btn {
+.cancel-btn,
+.update-btn {
   border: none;
   color: white;
   padding-top: 8px;
@@ -215,7 +216,8 @@ body {
 
 .delete-btn { background-color: red; }
 .accept-btn { background-color: green; }
-.cancel-btn {
+.cancel-btn,
+.update-btn {
   color: #898989;
   background-color: none;
 }
