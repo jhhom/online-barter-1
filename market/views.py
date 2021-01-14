@@ -6,6 +6,7 @@ from django.db.models import Count, Q
 from .forms import AddItemForm, UserRegistrationForm, UserUpdateForm, \
     ProfileUpdateForm, ItemSearchForm, ItemSortForm, ItemFilterForm
 from .models import Item, Barter
+from django.core.paginator import Paginator
 
 import statistics
 
@@ -165,7 +166,10 @@ def market(request):
             results = results.filter(condition=condition_filter)
         if category_filter != None:
             results = results.filter(category=category_filter)
-
+   
+    paginator = Paginator(results, 6) # Show 6 items per page.
+    page_number = request.GET.get('page',1)
+    page_obj = paginator.page(page_number)
 
     context = {
         'search_form': search_form,
@@ -175,7 +179,7 @@ def market(request):
         'sort_by': sort_by,
         'filter': filter,
         'categories': Item.ITEM_CATEGORIES,
-        'items': results,
+        'items': page_obj,
     }
     return render(request, 'market.html', context)
 

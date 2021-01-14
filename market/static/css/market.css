@@ -1,5 +1,5 @@
 .market-container {
-
+  box-sizing: border-box;
 }
 
 .page-title {
@@ -121,3 +121,15 @@
   list-style-type: none;
 }
 
+.pagination{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.step-links,
+.pagination p {
+  flex: 100%;
+}
+.step-links a{
+  padding: 20px;
+}
