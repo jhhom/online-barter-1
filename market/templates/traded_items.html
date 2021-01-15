@@ -120,6 +120,9 @@
           <td>{{ item.title }}</td>
           <td>{{ item.listed_date }}</td>
           <td>
+            <a href="{% url 'update_item' item.id %}">
+              <button type="button" class="update-btn">Edit</button>
+            </a>
             <form action="" method="post">
               {% csrf_token %}
               <input type="text" name="id" id="" value="D{{ item.id }}" style="display: none;">
