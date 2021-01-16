@@ -205,7 +205,7 @@ def register(request):
 def item(request):
     id = request.GET['id']
     item = Item.objects.get(id=id)
-    listed_items = []
+    listed_items = Item.objects.filter(owner=request.user)
     is_favourite = None
     barter_request_sent = False
     try:
