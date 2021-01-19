@@ -103,41 +103,12 @@
 <div class="content" id="content">
   <h1 class="form-title">Settings</h1>
   <div class="form-container">
-    <form action="" method="post" class="form" enctype="multipart/form-data">
-      <div class="form-container">
-        <div class="user-form">
-          {{ user_form.non_field_errors }}
-          <p class="form--field">
-            <label for="{{ user_form.username.id_for_label }}">Username</label>
-            {{ user_form.username }}
-            {{ user_form.username.errors }}
-          </p>
-          <p class="form--field">
-            <label for="{{ user_form.email.id_for_label }}">Email</label>
-            {{ user_form.email }}
-            {{ user_form.email.errors }}
-          </p>
-        </div>
-        <div class="profile-form">
-          {{ profile_form.non_field_errors}}
-          <p class="form--field">
-            <label for="{{ profile_form.address.id_for_label }}">Address</label>
-            {{ profile_form.address }}
-            {{ profile_form.address.errors }}
-          </p>
-          <p class="form--field">
-            <label for="{{ profile_form.phone.id_for_label }}">Phone Number</label>
-            {{ profile_form.phone }}
-            {{ profile_form.phone.errors }}
-          </p>
-          <p class="form--field file-input">
-            <label for="{{ profile_form.photo.id_for_label }}">Profile Photo</label>
-            {{ profile_form.photo }}
-            {{ profile_form.photo.errors }}
-          </p>
-        </div>
-      </div>
+    <form action="" method="post" enctype="multipart/form-data" class="form">
       {% csrf_token %}
+      <div class="form-container">
+        {{user_form.as_p}}
+        {{profile_form.as_p}}
+      </div>
       <p style="display: flex; justify-content: flex-end; margin-top: 32px;"><input type="submit" value="Update" class="btn"></p>
     </form>
   </div>
