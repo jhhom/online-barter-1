@@ -66,6 +66,8 @@
       </p>
       {% csrf_token %}
       <p style="margin-top: 32px;"><input type="submit" value="Login" class="btn"></p>
+      <p style="margin-top: 10px;">
+      <a class="redirect-link" href="{% url 'password_reset' %}">Forgot Password </a>
     </form>
     <p style="margin-bottom: 32px; padding-left: 20px;">
       Don't have an account? Register <a class="redirect-link" href="{% url 'register' %}">here</a>.
