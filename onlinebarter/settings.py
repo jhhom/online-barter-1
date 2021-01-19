@@ -152,4 +152,3 @@ EMAIL_HOST_PASSWORD = 'cmt322g5pass'
 # Google Cloud Storage services
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 GS_BUCKET_NAME = 'cmt322-onlinebarter'
-STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
