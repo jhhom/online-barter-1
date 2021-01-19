@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
@@ -188,8 +188,8 @@ def register(request):
 
 def item(request):
     id = request.GET['id']
-    item = Item.objects.get(id=id)
-    listed_items = []
+    item = get_object_or_404(Item, id=id)
+    listed_items = Item.objects.filter(owner=request.user)
     is_favourite = None
     barter_request_sent = False
     try:
