@@ -66,6 +66,7 @@ class Item(models.Model):
         related_name='favourited_by',
         blank=True)
 
+
 class Barter(models.Model):
     BARTER_STATUS = [
         ('PN', 'Pending'),
