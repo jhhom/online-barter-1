@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from .forms import AddItemForm, UserRegistrationForm, UserUpdateForm, \
-    ProfileUpdateForm, ItemSearchForm, ItemSortForm, ItemFilterForm
+    ProfileUpdateForm, ItemSearchForm, ItemSortForm, ItemFilterForm, Profile
 from .models import Item, Barter
 from django.core.paginator import Paginator
 from django.contrib import messages
@@ -18,6 +18,7 @@ def index(request):
 @login_required
 def profile(request):
     ready_items = Item.objects.filter(owner=request.user)
+    profile = Profile.objects.get(user=request.user)
     exchanged_items = [barter.item for barter in Barter.objects.filter(status='SC', item__owner=request.user)]
     if len(ready_items) > 4:
         ready_items = ready_items[:4]
@@ -27,6 +28,7 @@ def profile(request):
     print(exchanged_items)
     context = {
         'user': request.user,
+        'profile': profile,
         'ready_items': ready_items,
         'exchanged_items': exchanged_items
     }
