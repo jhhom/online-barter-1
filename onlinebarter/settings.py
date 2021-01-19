@@ -22,13 +22,14 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = '2!49m6-a*+t4l56oq=#6)7zyixf=+q=3w&9qpwsfo&%b2)kn+('
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
+GOOGLE_APPLICATION_CREDENTIALS = 'cmt322-onlinebarter.json'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = [
-    'serene-tundra-55963.herokuapp.com',
+    'onlinebartertrade.herokuapp.com',
     '127.0.0.1'
 ]
 
@@ -147,3 +148,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'cmt322g52020@gmail.com'
 EMAIL_HOST_PASSWORD = 'cmt322g5pass'
+
+# Google Cloud Storage services
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = 'cmt322-onlinebarter'
+STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
