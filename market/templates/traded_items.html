@@ -100,7 +100,16 @@
 </div>
 
 <div id="content" class="content">
-
+  {% if messages %}
+  <div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+    <strong>
+    {% for message in messages %}
+      {{ message }}
+    {% endfor %}
+    </strong>
+  </div>
+  {% endif %}
   <!-- O W N   T R A D E D  I T E M S -->
   <div>
     <h2 class="table-title">My items listed on market</h2>

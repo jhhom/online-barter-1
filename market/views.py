@@ -7,6 +7,7 @@ from .forms import AddItemForm, UserRegistrationForm, UserUpdateForm, \
     ProfileUpdateForm, ItemSearchForm, ItemSortForm, ItemFilterForm
 from .models import Item, Barter
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 import statistics
 
@@ -50,6 +51,7 @@ def traded_items(request):
 
         if action_code == 'D':
             item = Item.objects.filter(id=object_id).delete()
+            messages.success(request, 'Sucessfully deleted item.')
             delete_status = True
         # accept barter request
         elif action_code == 'A':
@@ -62,7 +64,7 @@ def traded_items(request):
     context = {
         'items': traded_items,
         'barter_requests': barter_requests,
-        'delete_status': delete_status,
+        #'delete_status': delete_status,
         'sent_requests': sent_requests,
         'completed_trades': completed_trades,
         'favourites': favourites,
@@ -79,7 +81,8 @@ def add_item(request):
             new_item = form.save(commit=False)
             new_item.owner = request.user
             new_item.save()
-            return HttpResponse('Successfully uploaded')
+            messages.success(request, 'Sucessfully added item.')
+            return redirect('traded_items')
     else:
         form = AddItemForm()
     return render(request, 'add_item.html', {'form': form})
@@ -93,6 +96,7 @@ def update_item(request, item_id):
     form = AddItemForm(request.POST or None, instance = item_sel)
     if form.is_valid():
        form.save()
+       messages.success(request, 'Sucessfully updated item.')
        return redirect('traded_items')
     return render(request, 'add_item.html', {'form':form,'item':item_sel})
 
