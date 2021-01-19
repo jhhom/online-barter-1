@@ -14,7 +14,8 @@ urlpatterns = [
     path('settings/', views.settings, name='settings'),
     path('traded_items/', views.traded_items, name='traded_items'),
     path('item/', views.item, name='item'),
-    path('profile/', views.profile, name='profile')
+    path('profile/', views.profile, name='profile'),
+    path('traded_items/update/<int:item_id>', views.update_item, name='update_item')
 ]
 
 
