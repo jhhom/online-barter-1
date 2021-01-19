@@ -8,7 +8,7 @@ class Profile(models.Model):
     address = models.CharField(max_length=100, blank=True)
     phone = models.CharField(max_length=20, blank=True)
     photo = models.ImageField(upload_to='users/%Y/%m/%d',
-                            default='default.png')
+                            default='image/profile-default-photo.jpg')
     
     def __str__(self):
         return f'Profile for user {self.user.username}'
