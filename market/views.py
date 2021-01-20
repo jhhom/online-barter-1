@@ -137,7 +137,7 @@ def market(request):
         search_form = ItemSearchForm(request.GET)
         if search_form.is_valid():
             term = search_form.cleaned_data['term']
-            results = Item.objects.filter(title__contains=term)
+            results = Item.objects.filter(title__icontains=term)
             if request.user.is_authenticated:
                 try:
                     most_favourited = statistics.mode(
