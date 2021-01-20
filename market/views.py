@@ -145,7 +145,7 @@ def market(request):
                     )
                     results \
                         .extra(select={'match': f'category="{most_favourited}"'}) \
-                        .order_by('-match')
+                        .order_by('match')
                 except:
                     pass
     
